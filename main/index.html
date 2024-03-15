@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search and Pagination</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="container">
+    <input type="text" id="searchBox" placeholder="Search...">
+    <div id="tableContainer">
+      <table id="resultsTable">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Place Name</th>
+            <th>Country</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr id="loadingRow">
+            <td colspan="3" class="loading-spinner"></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div id="pagination" class="hidden">
+        <button id="prevPage">Previous</button>
+        <span id="pageNumbers"></span>
+        <button id="nextPage">Next</button>
+      </div>
+    </div>
+    <div id="limitBox">
+      <input type="number" id="limitInput" min="1" max="10" value="5">
+      <span>Limit results (1-10):</span>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
