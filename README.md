@@ -4,4 +4,4 @@ This assessment is based on searching up of the cities along with pagination fun
 
 The tech stack used to complete this assessment is vanilla HTML, CSS and JavaScript.
 
-## Note: Please do refresh before using it
+Note: Please do refresh before using it
