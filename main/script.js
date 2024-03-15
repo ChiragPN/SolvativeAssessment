@@ -59,25 +59,6 @@ function performSearch() {
 function fetchData() {
     const query = searchBox.value.trim();
     loadingRow.classList.remove('hidden');
-//   const url = `https://wft-geo-db.p.rapidapi.com/v1/geo/cities?q=${query}&limit=${limit}&start=${startIndex}`
-//   fetch(url, {
-//     method: 'GET',
-//     params: { countryIds: 'IN', namePrefix: 'del', limit: '5' },
-//     headers: {
-//         'x-rapidapi-host': 'wft-geo-db.p.rapidapi.com',
-//         'x-rapidapi-key': '4ac5e3352fmshe6ac515ca3b8ccap1f0045jsnf0a504a87bbe'
-//     }
-//   })
-//     .then(response => response.json())
-//     .then(data => {
-//       renderResults(data);
-//       updatePagination();
-//       loadingRow.classList.add('hidden');
-//     })
-//     .catch(error => {
-//       console.error('Error fetching data:', error);
-//       loadingRow.classList.add('hidden');
-//     });
     const url = `https://wft-geo-db.p.rapidapi.com/v1/geo/cities?countryIds=IN&namePrefix=${query}&limit=${limit}&offset=${(currentPage - 1) * limit}`;
     const options = {
         method: 'GET',
@@ -89,7 +70,7 @@ function fetchData() {
 
     fetch(url, options).then(response => response.json())
     .then(data => {
-        console.log(data);
+        // console.log(data);
         renderResults(data);
         updatePagination();
         loadingRow.classList.add('hidden');
@@ -100,22 +81,22 @@ function fetchData() {
 }
 
 function renderResults(data) {
-  totalResults = data.totalResults || 0;
-  console.log(totalResults);
+  totalResults = data;
+//   console.log(totalResults);
   if (totalResults === 0) {
     displayNoResultsMessage("No result found");
     return;
   }
   resultsTable.querySelector('tbody').innerHTML = '';
-  data.results.forEach((result, index) => {
+  totalResults.data.forEach((result, index) => {
     const row = document.createElement('tr');
     row.innerHTML = `
       <td>${index + 1}</td>
-      <td>${result.placeName}</td>
-      <td><img src="https://www.countryflagsapi.com/${result.countryCode}/flat/64.png" alt="${result.countryName} flag">${result.countryName}</td>
+      <td>${result.name}</td>
+      <td><img src="https://www.countryflagsapi.com/${result.countryCode}/flat/64.png" alt="${result.country} flag"></td>
     `;
-    resultsTable.querySelector('tbody').appendChild(row);
-  });
+    document.querySelector('tbody').appendChild(row);
+  });  
 }
 
 function displayNoResultsMessage(message) {
